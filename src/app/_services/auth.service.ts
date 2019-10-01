@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators';
 
 import { environment } from './../../environments/environment';
 import { User } from './../_models/user.model';
+import { Router } from '@angular/router';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -34,5 +35,6 @@ export class AuthService {
         // remove user from local storage to log user out
         localStorage.removeItem('user');
         this.userObserver.next(null);
+        location.reload(true);
     }
 }

@@ -1,1 +1,31 @@
-<p>home works!</p>
+<mat-toolbar
+  fxLayout="row"
+  fxLayoutAlign="space-between center"
+  color="primary"
+>
+  <h4 *ngIf="!loading">Hello {{ user.username }}!</h4>
+  <div>
+    <button
+      mat-icon-button
+      matTooltip="My Account"
+      [matMenuTriggerFor]="accountMenu"
+    >
+      <mat-icon>account_circle</mat-icon>
+    </button>
+    <mat-menu #accountMenu [overlapTrigger]="false" yPosition="below">
+      <button mat-menu-item (click)="logout()"><mat-icon>exit_to_app</mat-icon>Logout</button>
+    </mat-menu>
+  </div>
+</mat-toolbar>
+<mat-sidenav-container class="container">
+  <mat-sidenav-content>
+    <div class="container mat-body-1">
+      <div>
+        <button mat-stroked-button color="accent" (click)="callAdminEndpoint()">Call Admin endpoint!</button>
+      </div>
+      <div>
+        <button mat-stroked-button color="warn" (click)="callUserEndpoint()">Call User endpoint!</button>
+      </div>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

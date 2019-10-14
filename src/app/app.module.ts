@@ -36,7 +36,7 @@ import { HomeComponent } from './home/home.component';
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: UnauthorizedInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: UnauthorizedInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })

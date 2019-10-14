@@ -50,6 +50,12 @@ export class HomeComponent implements OnInit {
         this.snackBar.open(data, 'Cerrar', {
           duration: 3000
         });
+      },
+      error => {
+        console.log(error);
+        this.snackBar.open(error, 'Cerrar', {
+          duration: 3000
+        });
       });
   }
 

@@ -18,7 +18,7 @@ export class UnauthorizedInterceptor implements HttpInterceptor {
         return next.handle(request).pipe(catchError(err => {
             if (err.status === 401) {
                 this.authService.logout();
-                location.reload(true);
+                location.href = "/login?error=401"
             }
 
             const error = err.error.message || err.statusText;

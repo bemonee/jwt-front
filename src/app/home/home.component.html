@@ -1,31 +1,44 @@
-<mat-toolbar
-  fxLayout="row"
-  fxLayoutAlign="space-between center"
-  color="primary"
->
-  <h4 *ngIf="!loading">Hello {{ user.username }}!</h4>
-  <div>
-    <button
-      mat-icon-button
-      matTooltip="My Account"
-      [matMenuTriggerFor]="accountMenu"
-    >
-      <mat-icon>account_circle</mat-icon>
+<mat-toolbar color="primary">
+  <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
+    <button mat-icon-button>
+      <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
     </button>
-    <mat-menu #accountMenu [overlapTrigger]="false" yPosition="below">
-      <button mat-menu-item (click)="logout()"><mat-icon>exit_to_app</mat-icon>Logout</button>
-    </mat-menu>
-  </div>
+    <h4 *ngIf="!loading">Hello {{ user.username }}!</h4>
+    <div>
+      <button mat-icon-button matTooltip="My Account" [matMenuTriggerFor]="accountMenu">
+        <mat-icon>account_circle</mat-icon>
+      </button>
+      <mat-menu #accountMenu [overlapTrigger]="false" yPosition="below">
+        <button mat-menu-item (click)="logout()">
+          <mat-icon>exit_to_app</mat-icon>Logout
+        </button>
+      </mat-menu>
+    </div>
+  </mat-toolbar-row>
 </mat-toolbar>
 <mat-sidenav-container>
+  <mat-sidenav #sidenav>
+    <mat-nav-list>
+      <a mat-list-item (click)="callAdminEndpoint()">Call Admin endpoint!</a>
+      <a mat-list-item (click)="callUserEndpoint()">Call User endpoint!</a>
+    </mat-nav-list>
+  </mat-sidenav>
   <mat-sidenav-content>
-    <div class="container mat-body-1">
-      <div>
-        <button mat-stroked-button color="accent" (click)="callAdminEndpoint()">Call Admin endpoint!</button>
-      </div>
-      <div>
-        <button mat-stroked-button color="warn" (click)="callUserEndpoint()">Call User endpoint!</button>
-      </div>
+    <div fxLayout="column" fxLayoutAlign="center center"  class="main-content">
+      <h1>My Info:</h1>
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        <ng-container matColumnDef="property">
+          <th mat-header-cell *matHeaderCellDef> Property </th>
+          <td mat-cell *matCellDef="let element"> {{element.property}} </td>
+        </ng-container>
+        <ng-container matColumnDef="value">
+          <th mat-header-cell *matHeaderCellDef> Value </th>
+          <td mat-cell *matCellDef="let element"> {{element.value}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>

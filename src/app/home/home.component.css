@@ -1,3 +1,8 @@
-div.container {
-  height: 80vh !important;
+div.main-content {
+  height: calc(100vh - 84px) !important;
 }
+
+table {
+  width: 50%;
+}
+

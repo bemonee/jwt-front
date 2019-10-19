@@ -17,6 +17,7 @@ import { AngularMaterialModule } from './_shared/angular.material.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
+import { MatTableModule } from '@angular/material';
 
 @NgModule({
   declarations: [

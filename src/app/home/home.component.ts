@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit {
     private userService: UserService,
     private authService: AuthService,
     private snackBar: MatSnackBar
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.loading = true;
@@ -34,29 +34,37 @@ export class HomeComponent implements OnInit {
   callAdminEndpoint() {
     this.userService
       .getAdmin()
-      .pipe(first())
       .subscribe(data => {
-        this.snackBar.open(data, 'Cerrar', {
+        this.snackBar.open(data.body.message, 'Cerrar', {
           duration: 3000
         });
-      });
+      },
+        error => {
+          if (error.status === 403) {
+            this.snackBar.open("Ups! no tenes permiso para ejecutar este comando", 'Cerrar', {
+              duration: 3000
+            });
+          } else {
+            this.snackBar.open(error.message || error.statusText, 'Cerrar', {
+              duration: 3000
+            });
+          }
+        });
   }
 
   callUserEndpoint() {
     this.userService
       .getGreeting()
-      .pipe(first())
       .subscribe(data => {
-        this.snackBar.open(data, 'Cerrar', {
+        this.snackBar.open(data.body.message, 'Cerrar', {
           duration: 3000
         });
       },
-      error => {
-        console.log(error);
-        this.snackBar.open(error, 'Cerrar', {
-          duration: 3000
+        error => {
+          this.snackBar.open(error, 'Cerrar', {
+            duration: 3000
+          });
         });
-      });
   }
 
   logout() {

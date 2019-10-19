@@ -21,8 +21,8 @@ export class UnauthorizedInterceptor implements HttpInterceptor {
                 location.href = "/login?error=401"
             }
 
-            const error = err.error.message || err.statusText;
-            return throwError(error);
+            //const error = err.error.message || err.statusText;
+            return throwError(err);
         }))
     }
 }
